@@ -12,7 +12,7 @@ gray = ["r", "t", "u", "a", "s", "h", "c", "n", "m"]
 yellow = ["l", "o"]
 
 # Letters that are in the right spot - green - use None for missing letters
-known = [None, "l", "o", None, "e"]
+green = [None, "l", "o", None, "e"]
 
 # For gray letter filtering
 def check_letters(word):
@@ -34,17 +34,16 @@ def gen_words(wordlist, pos):
 def find_words():
     pos = 0 # Current modifier position for None's
     words = []
-    words.append(known.copy())
+    words.append(green.copy())
     foundWords = []
     foundYellow = False
-    for k in known:
-        if k == None:
+    for g in green:
+        if g == None:
             words = gen_words(words, pos)
             pos += 1
         else:
             pos += 1
     
-    count = 0
     for w in words:
         if None not in w:
             word = ''.join(w)
@@ -60,14 +59,12 @@ def find_words():
                                 
                         if foundYellow:
                             foundWords.append(''.join(word))
-                            count += 1
                     else:
                         foundWords.append(''.join(word))
-                        count += 1
     
     for w in foundWords:
         print(w)
-    print("Generated", len(words), "words. Possible words for answer:", count)
+    print("Generated", len(words), "words. Possible words for answer:", len(foundWords))
 
 
 find_words()
